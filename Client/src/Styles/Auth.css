@@ -1,0 +1,21 @@
+
+.formContainer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login, .register {
+    padding: 2rem;
+}
+
+.details {
+    text-align: center;
+}
+
+.errMsg {
+    color: red;
+    font-weight: bolder;
+}

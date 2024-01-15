@@ -1,0 +1,93 @@
+.blogs {
+    width: 60%;
+    height: auto;
+    margin: 1rem auto;
+    box-shadow: 0 0 10px;
+    background-color: beige;
+    position: relative;
+    border-radius: 1.5rem;
+}
+
+.post {
+    display: flex;
+    justify-content: space-between;
+    /* gap: 1rem; */
+}
+
+.postImage img {
+    width: 15rem;
+    height: 100%;
+    position: absolute;
+    border-radius: 1.5rem 0 0 1.5rem;
+}
+
+.postDescription {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    /* background-color: rebeccapurple; */
+    width: 70%;
+}
+
+.controls {
+    width: 100%;
+    padding: 1rem 0 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.controls svg, button {
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    background: transparent;
+    border: none;
+    box-shadow: 0 0 10px;
+    cursor: pointer;
+}
+
+.controls .view {
+    color: blue;
+}
+
+.controls .edit {
+    color: green;
+}
+
+.controls .delete {
+    color: red;
+}
+
+/* View Blog Page */
+.viewBlog {
+    width: 100%;
+    /* text-align: center; */
+}
+
+.viewBlog img {
+    display: block;
+    height: 20rem;
+    width: 45rem;
+    margin: 0 auto 1rem;
+    text-align: center;
+}
+
+/* Create Blog */
+
+.fields {
+    width: 20rem;
+    height: auto;
+    margin: 0 auto;
+    padding: 0.5rem 0.5rem 0;
+    box-shadow: 0 0 10px rgb(197, 197, 196);
+}
+
+.reactQuill {
+    border: 2px solid #000;
+}
+
+.ql-editor {
+    border-top: 1px solid #000;
+}
