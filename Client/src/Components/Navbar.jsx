@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import '../Styles/Navbar.css'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { removeToken } from '../Features/Auth.Slice'
 import { clearProfile } from '../Features/VerifiedUser.Slice'
 import { useSelector, useDispatch } from 'react-redux'
@@ -19,6 +21,11 @@ const Navbar = () => {
   }
 
   const handleLogout = () => {
+    toast.success('Logged Out', {
+      position: 'top-center',
+      theme: 'dark',
+      autoClose: 1500
+    })
     dispatch(removeToken(userToken));
     dispatch(clearProfile());
   }

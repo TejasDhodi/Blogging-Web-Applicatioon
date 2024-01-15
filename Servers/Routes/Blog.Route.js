@@ -8,7 +8,7 @@ const blogValidatorSchema = require('../Validators/Blog.Validator');
 router.route('/createBlog').post([upload, validate(blogValidatorSchema)], createBlog);
 router.route('/blogs').get(getBlogData);
 router.route('/blogs/:id').get(getSingleBlog);
-router.route('/blogs/edit/:id').put(upload, updateBlog);
+router.route('/blogs/edit/:id').put([upload, validate(blogValidatorSchema)], updateBlog);
 router.route('/blogs/delete/:id').delete(deleteBlog);
 
 module.exports = router;

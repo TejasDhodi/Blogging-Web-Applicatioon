@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import BlogEditor from '../Components/BlogEditor';
 import axios from 'axios';
+import { DNA } from 'react-loader-spinner'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const BlogEdit = () => {
 
     const [input, setInput] = useState({
         title: "",
-        summary: ""
+        summary: "",
     });
 
     const [content, setContent] = useState("");
-
     const [image, setImage] = useState(null);
+    const [errorMsg, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -32,6 +36,8 @@ const BlogEdit = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true);
+
             const formData = new FormData();
 
             formData.append('title', input.title);
@@ -46,14 +52,25 @@ const BlogEdit = () => {
             })
 
             if (response.status === 200) {
-                alert('Updated');
+                toast.success('Post Updated Successfully', {
+                    theme: 'dark',
+                    position: "top-center",
+                    autoClose: 1500
+                })
                 navigate('/')
             }
 
             console.log(response.data);
         } catch (error) {
+            setErrorMessage(error.response.data);
+            toast.warning(error.response.data.message, {
+                position: 'top-center',
+                theme: 'dark',
+                autoClose: 1500,
+            })
             console.log('Unable to update Blog : ', error);
-            alert('Unable to update Blog')
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -76,15 +93,36 @@ const BlogEdit = () => {
     return (
         <>
             <form className="main" onSubmit={handleUpdate}>
-                <input type="text" name="title" value={input.title} onChange={handleInputs} />
-                <input type="text" name="summary" value={input.summary} onChange={handleInputs} />
-                <input type="file" onChange={handleFile} />
+                <div className="fields">
+                    <h2 className='headTitle'>Update Post</h2>
+                    <div className="inputs">
+                        <label htmlFor="title">Title</label>
+                        <input type="text" id='title' name="title" value={input.title} onChange={handleInputs} />
+                    </div>
+                    <div className="inputs">
+                        <label htmlFor="summary">Summary</label>
+                        <input type="text" id='summary' name="summary" value={input.summary} onChange={handleInputs} />
+                    </div>
+                    <div className="inputs">
+                        <label htmlFor="image"></label>
+                        <input type="file" id='image' onChange={handleFile} />
+                    </div>
+                    <div className="errors">
+                        {
+                            errorMsg && <p className='errMsg'>{JSON.stringify(errorMsg).slice(34).split('"}').join(" ") || JSON.stringify(errorMsg).slice(8).split('"}').join(" ")}</p>
+                        }
+                    </div>
+                </div>
                 <BlogEditor
                     value={content}
                     onChange={newValue => setContent(newValue)}
                 />
 
-                <button type="submit">Create</button>
+                <div className="controls">
+                    {
+                        loading ? <DNA /> : <button type="submit"> Update</button>
+                    }
+                </div>
             </form>
         </>
     )

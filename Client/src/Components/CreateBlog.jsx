@@ -60,7 +60,8 @@ const CreateBlog = () => {
             if (response.status === 201) {
                 toast.success('Post Created Successfully', {
                     theme: 'dark',
-                    position: "top-center"
+                    position: "top-center",
+                    autoClose: 1500
                 })
                 navigate('/')
             }
@@ -98,7 +99,7 @@ const CreateBlog = () => {
                 </div>
                 <div className="errors">
                     {
-                        errorMsg && <p className='errMsg'>{JSON.stringify(errorMsg).slice(34).split('"}').join(" ") || JSON.stringify(errorMsg).slice(8).split('"}').join(" ")}</p>
+                        errorMsg && <p className='errMsg'>{JSON.stringify(errorMsg.message)}</p>
                     }
                 </div>
             </div>

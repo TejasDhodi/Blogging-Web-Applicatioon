@@ -98,7 +98,7 @@ const updateBlog = async (req, res) => {
         res.status(200).json({ updatedBlogData });
     } catch (error) {
         console.error('Unable to update blog:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Unable to Update the blog' });
     }
 
 }

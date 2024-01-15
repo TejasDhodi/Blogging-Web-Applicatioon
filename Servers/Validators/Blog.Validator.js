@@ -16,10 +16,6 @@ const blogValidatorSchema = z.object({
         .string({ required_error: "Content is required" })
         .trim()
         .min(100, { message: "Content Should be of atleast 100 Character" }),
-
-    auther: z
-        .string({ required_error: "auther is Required" })
-        .trim(),
 });
 
 module.exports = blogValidatorSchema;
