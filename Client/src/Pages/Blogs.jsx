@@ -27,9 +27,9 @@ const Blogs = () => {
             {
                 blog ? (
                     <div className='viewBlog main'>
-                        <img src={blog.image} alt="" />
-                        <h1>{blog.title}</h1>
-                        <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
+                        <img className='blogImg' src={blog.image} alt="" />
+                        <h1 className='blogTitle'>{blog.title}</h1>
+                        <div className='blogContent' dangerouslySetInnerHTML={{ __html: blog.content }}></div>
                     </div>
                 ) : ''
             }

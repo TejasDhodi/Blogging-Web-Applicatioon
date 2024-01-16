@@ -15,7 +15,7 @@
 }
 
 .postImage img {
-    width: 15rem;
+    width: 28%;
     height: 100%;
     position: absolute;
     border-radius: 1.5rem 0 0 1.5rem;
@@ -25,9 +25,13 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
     /* background-color: rebeccapurple; */
     width: 70%;
+}
+
+.postSummary {
+    text-align: justify;
 }
 
 .controls {
@@ -66,13 +70,23 @@
     /* text-align: center; */
 }
 
-.viewBlog img {
+.viewBlog .blogImg {
     display: block;
     height: 20rem;
-    width: 45rem;
+    width: 80%;
     margin: 0 auto 1rem;
     text-align: center;
 }
+
+.viewBlog .blogTitle {
+    text-align: center;
+}
+
+.viewBlog .blogContent {
+    text-align: justify;
+    padding: 1rem;
+}
+
 
 /* Create Blog */
 
@@ -90,4 +104,57 @@
 
 .ql-editor {
     border-top: 1px solid #000;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1280px) { 
+    .postTitle {
+        font-size: 1.3rem;
+    }
+    
+    .postSummary {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Posted Blogs */
+    .post {
+        flex-direction: column;
+    }
+    .postDescription {
+        width: 100%;
+    }
+    .postImage img {
+        width: 100%;
+        position: static;
+        border-radius: 1.5rem 1.5rem 0 0;
+    }
+
+    /* View Blogs */
+    .blogs  {
+        width: 80%;
+        padding: 1rem;
+    }
+
+    .postImage img {
+        box-shadow: 0 0 15px;
+    }
+
+    /* Create Blog */
+    .ql-toolbar.ql-snow {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: self-end;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .ql-toolbar.ql-snow .ql-formats {
+        margin-right: 0;
+    }
+
+    .ql-snow.ql-toolbar button{
+        margin: 0 0.2rem;
+    }
 }
