@@ -73,7 +73,7 @@ const Loign = () => {
         <h2 className='headTitle'>Login</h2>
         <div className="inputs">
           <input type="text" name="email" value={input.email} onChange={handleInputs} placeholder='Email Id' required />
-          <input type="text" name="password" value={input.password} onChange={handleInputs} placeholder='Password' required />
+          <input type='password' name="password" value={input.password} onChange={handleInputs} placeholder='Password' required />
         </div>
         <div className="controls">
           {
