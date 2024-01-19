@@ -32,6 +32,8 @@
 
 .postSummary {
     text-align: justify;
+    width: 100%;
+    word-wrap: break-word;
 }
 
 .controls {

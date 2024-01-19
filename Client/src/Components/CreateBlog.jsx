@@ -71,8 +71,8 @@ const CreateBlog = () => {
             console.log(response.data);
 
         } catch (error) {
-            setErrorMessage(error.response);
-            console.log(`error ${error}`);
+            setErrorMessage(error.response.data);
+            console.log(`error ${JSON.stringify(error.response.data)}`);
         } finally {
             setLoading(false)
         }
@@ -101,7 +101,7 @@ const CreateBlog = () => {
                 </div>
                 <div className="errors">
                     {
-                        errorMsg && <p className='errMsg'>{JSON.stringify(errorMsg.message)}</p>
+                        errorMsg && <p className='errMsg'>{JSON.stringify(errorMsg).slice(34).split('"}')}</p>
                     }
                 </div>
             </div>
