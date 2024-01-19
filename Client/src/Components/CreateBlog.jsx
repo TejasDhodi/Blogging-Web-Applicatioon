@@ -12,11 +12,12 @@ import { useSelector } from 'react-redux';
 const CreateBlog = () => {
     const verifiedData = useSelector((state) => state.VerifiedUser);
     const userName = verifiedData && verifiedData.userName
+    // console.log(`userName ${userName}`);
 
     const [input, setInput] = useState({
         title: "",
         summary: "",
-        auther: userName
+        author: userName
     });
 
     const [content, setContent] = useState("");
@@ -29,9 +30,11 @@ const CreateBlog = () => {
     const handleInputs = (e) => {
         const { name, value } = e.target;
         setInput((prevData) => ({
-            ...prevData, [name]: value
+            ...prevData,
+            [name]: value,
         }))
     }
+
 
     const handleFile = (e) => {
         const selectedFile = e.target.files[0];
@@ -47,8 +50,8 @@ const CreateBlog = () => {
             const formData = new FormData();
             formData.append('title', input.title);
             formData.append('summary', input.summary);
-            formData.append('auther', input.auther);
             formData.append('content', content);
+            formData.append('author', input.author);
             formData.append('image', image);
 
             const response = await axios.post('http://localhost:3000/api/v1/createBlog', formData, {
@@ -68,9 +71,8 @@ const CreateBlog = () => {
             console.log(response.data);
 
         } catch (error) {
-            setErrorMessage(error.response.data);
-            toast.warning(error.response.data.message)
-            // alert('Unable to Create Blog')
+            setErrorMessage(error.response);
+            console.log(`error ${error}`);
         } finally {
             setLoading(false)
         }
@@ -90,8 +92,8 @@ const CreateBlog = () => {
                     <input type="text" id='summary' name="summary" value={input.summary} onChange={handleInputs} placeholder='Add Summary Of Your Blog' required />
                 </div>
                 <div className="inputs">
-                    <label htmlFor="auther" >Auther</label>
-                    <input type="text" id='auther' name="auther" value={input.auther} onChange={handleInputs} readOnly required />
+                    <label htmlFor="author">Author</label>
+                    <input type="text" id='author' name="author" value={input.author} onChange={handleInputs} required />
                 </div>
                 <div className="inputs">
                     <label htmlFor="image">Image</label>

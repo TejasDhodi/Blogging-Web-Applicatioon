@@ -5,12 +5,17 @@ import { DNA } from 'react-loader-spinner'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const BlogEdit = () => {
+
+    const verifiedData = useSelector((state) => state.VerifiedUser);
+    const userName = verifiedData && verifiedData.userName;
 
     const [input, setInput] = useState({
         title: "",
         summary: "",
+        author: userName
     });
 
     const [content, setContent] = useState("");
@@ -43,6 +48,7 @@ const BlogEdit = () => {
             formData.append('title', input.title);
             formData.append('summary', input.summary);
             formData.append('content', content);
+            formData.append('author', input.author);
             formData.append('image', image);
 
             const response = await axios.put(`http://localhost:3000/api/v1/blogs/edit/${id}`, formData, {
@@ -102,6 +108,10 @@ const BlogEdit = () => {
                     <div className="inputs">
                         <label htmlFor="summary">Summary</label>
                         <input type="text" id='summary' name="summary" value={input.summary} onChange={handleInputs} />
+                    </div>
+                    <div className="inputs">
+                        <label htmlFor="author">Author</label>
+                        <input type="text" id='author' name="author" value={input.author} onChange={handleInputs} required />
                     </div>
                     <div className="inputs">
                         <label htmlFor="image"></label>

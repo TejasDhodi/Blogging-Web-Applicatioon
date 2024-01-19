@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaRegEdit, FaTrash } from 'react-icons/fa'
 import { CiRead } from "react-icons/ci";
-const AllBlogs = ({ title, summary, image, localTime, _id, auther, userToken, handleNavigate, handleEdit, handleDeleteBlog }) => {
+const AllBlogs = ({ title, summary, image, localTime, _id, author, userToken, handleNavigate, handleEdit, handleDeleteBlog }) => {
     return (
         <>
             <div className="blogs">
@@ -13,7 +13,7 @@ const AllBlogs = ({ title, summary, image, localTime, _id, auther, userToken, ha
                         <h2 className='postTitle'>{title}</h2>
                         <div className="info">
                             <p className="time">Created At : {localTime} </p>
-                            <p>Created By : {auther}</p>
+                            <p>Created By : {author}</p>
                         </div>
                         <p className='postSummary'>{summary}</p>
                     </div>

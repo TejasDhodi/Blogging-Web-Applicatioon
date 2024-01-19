@@ -1,4 +1,3 @@
-// title summary image auther 
 const z = require('zod');
 
 const blogValidatorSchema = z.object({
@@ -16,6 +15,10 @@ const blogValidatorSchema = z.object({
         .string({ required_error: "Content is required" })
         .trim()
         .min(100, { message: "Content Should be of atleast 100 Character" }),
+
+    author: z
+        .string({ required_error: "Author is required" })
+        .trim()
 });
 
 module.exports = blogValidatorSchema;

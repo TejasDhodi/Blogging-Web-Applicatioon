@@ -4,34 +4,31 @@ const blogModel = require('../Model/Blog.Model');
 // Post Controller
 const createBlog = async (req, res) => {
     try {
-        const { title, summary, content, auther } = req.body;
+        const { title, summary, content, author } = req.body;
         const image = req.files?.image[0]?.path;
 
-        if (!title || !summary || !content || !image || !auther) {
-            res.status(500).json({
+        if (!title || !summary || !content || !image) {
+            return res.status(500).json({
                 message: "All fields are Required"
             })
         }
 
         const imageUrl = await uploadToCloudinary(image);
-        const userData = req.user;
-        console.log('userData', userData);
 
         const blogData = await blogModel.create({
             title,
             summary,
             content,
             image: imageUrl.url,
-            auther
-            // name: userData.userName
+            author
         })
-        // console.log(title, summary, content, image);
+
         res.status(201).json({ createdBlog: blogData });
         return blogData;
 
     } catch (error) {
-        res.status(400).json({
-            message: `Unable to create blog ${error}`
+        return res.status(400).json({
+            message: `Unable to create blog :  ${error}`
         })
     }
 }
@@ -73,7 +70,7 @@ const updateBlog = async (req, res) => {
             })
         }
 
-        let imageUrl = req.body.image; // Use the existing image URL if a new image is not provided
+        let imageUrl = req.body.image;
 
         if (image) {
             imageUrl = await uploadToCloudinary(image);

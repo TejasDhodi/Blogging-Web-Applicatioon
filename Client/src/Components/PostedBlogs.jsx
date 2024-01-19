@@ -6,6 +6,8 @@ import Loading from './Loading'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setProfile, clearProfile } from '../Features/VerifiedUser.Slice'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PostedBlogs = () => {
     const [blogs, setBlogs] = useState([]);
@@ -26,6 +28,10 @@ const PostedBlogs = () => {
             const data = response.data.foundBlog;
             console.log('Data', data);
             setBlogs(data)
+            console.log({
+                blogs: blogs,
+                userName: userName
+            });
         } catch (error) {
             console.log('Unable to get Data');
         } finally {
@@ -51,19 +57,25 @@ const PostedBlogs = () => {
         }
     }
 
+    // To Navigate to View Blog Page
     const handleNavigate = (id) => {
         navigate(`/blog/${id}`)
     }
-
+    // Navigate to Edit Blog Page
     const handleEdit = (id) => {
         navigate(`/blog/edit/${id}`)
     }
 
+    // To Delete Blog
     const handleDeleteBlog = async (id) => {
         try {
             const response = await axios.delete(`http://localhost:3000/api/v1/blogs/delete/${id}`);
             if (response.status === 200) {
-                alert('Blog Deleted')
+                toast.success('Blog Deleted', {
+                    theme: 'dark',
+                    position: "top-center",
+                    autoClose: 1500
+                })
                 getBlogData();
             }
         } catch (error) {
@@ -84,9 +96,9 @@ const PostedBlogs = () => {
                     <div className='main'>
                         {
                             userName ? (
-                                blogs.filter((e) => e.auther === userName)
+                                blogs.filter((e) => e.author === userName)
                                     .map((currElem, index) => {
-                                        const { title, summary, image, createdAt, _id, auther } = currElem;
+                                        const { title, summary, image, createdAt, _id, author } = currElem;
                                         const localTime = new Date(createdAt).toLocaleString();
                                         return (
                                             <AllBlogs
@@ -95,7 +107,7 @@ const PostedBlogs = () => {
                                                 image={image}
                                                 localTime={localTime}
                                                 _id={_id}
-                                                auther={auther}
+                                                author={author}
                                                 userToken={userToken}
                                                 handleNavigate={handleNavigate}
                                                 handleEdit={handleEdit}
@@ -106,7 +118,7 @@ const PostedBlogs = () => {
                                     })
                             ) : (
                                 blogs.map((currElem, index) => {
-                                    const { title, summary, image, createdAt, _id, auther } = currElem;
+                                    const { title, summary, image, createdAt, _id, author } = currElem;
                                     const localTime = new Date(createdAt).toLocaleString();
                                     return (
                                         <AllBlogs
@@ -115,7 +127,7 @@ const PostedBlogs = () => {
                                             image={image}
                                             localTime={localTime}
                                             _id={_id}
-                                            auther={auther}
+                                            author={author}
                                             userToken={userToken}
                                             handleNavigate={handleNavigate}
                                             handleEdit={handleEdit}
