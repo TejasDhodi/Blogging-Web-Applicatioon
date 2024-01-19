@@ -51,7 +51,7 @@ const BlogEdit = () => {
             formData.append('author', input.author);
             formData.append('image', image);
 
-            const response = await axios.put(`http://localhost:3000/api/v1/blogs/edit/${id}`, formData, {
+            const response = await axios.put(`https://blog-backend-api-99h6.onrender.com/api/v1/blogs/edit/${id}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 }
@@ -81,7 +81,7 @@ const BlogEdit = () => {
     }
 
     const fillOlderContent = async () => {
-        const response = await axios.get(`http://localhost:3000/api/v1/blogs/${id}`);
+        const response = await axios.get(`https://blog-backend-api-99h6.onrender.com/api/v1/blogs/${id}`);
         const data = response.data.singleBlog;
 
         setInput({

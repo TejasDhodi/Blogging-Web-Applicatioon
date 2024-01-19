@@ -9,7 +9,7 @@ const Blogs = () => {
 
     const handleSingleBlog = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/v1/blogs/${id}`);
+            const response = await axios.get(`https://blog-backend-api-99h6.onrender.com/api/v1/blogs/${id}`);
             const data = response.data.singleBlog;
             setBlog(data);
             console.log(data);

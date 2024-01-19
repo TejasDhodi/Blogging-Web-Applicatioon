@@ -24,7 +24,7 @@ const PostedBlogs = () => {
     const getBlogData = async () => {
         try {
             setLoad(true);
-            const response = await axios.get('http://localhost:3000/api/v1/blogs');
+            const response = await axios.get('https://blog-backend-api-99h6.onrender.com/api/v1/blogs');
             const data = response.data.foundBlog;
             console.log('Data', data);
             setBlogs(data)
@@ -42,7 +42,7 @@ const PostedBlogs = () => {
     // To get the data of all blogs
     const profileInfo = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/v1/login/profile', {
+            const response = await axios.get('https://blog-backend-api-99h6.onrender.com/api/v1/login/profile', {
                 headers: {
                     Authorization: `bearer ${userToken}`
                 }
@@ -69,7 +69,7 @@ const PostedBlogs = () => {
     // To Delete Blog
     const handleDeleteBlog = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3000/api/v1/blogs/delete/${id}`);
+            const response = await axios.delete(`https://blog-backend-api-99h6.onrender.com/api/v1/blogs/delete/${id}`);
             if (response.status === 200) {
                 toast.success('Blog Deleted', {
                     theme: 'dark',

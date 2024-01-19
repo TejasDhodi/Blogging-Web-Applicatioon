@@ -32,7 +32,7 @@ const Register = () => {
         try {
             setLoading(true);
 
-            const res = await axios.post('http://localhost:3000/api/v1/register', input, {
+            const res = await axios.post('https://blog-backend-api-99h6.onrender.com/api/v1/register', input, {
                 headers: {
                     "Content-Type": 'application/json'
                 }
