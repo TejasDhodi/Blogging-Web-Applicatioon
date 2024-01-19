@@ -31,7 +31,7 @@
     gap: 0.5rem;
 }
 
-.menu svg {
+.menu {
     display: none;
 }
 
@@ -61,8 +61,10 @@
         gap: 0.5rem;
     }
 
-    .menu svg {
+    .menu {
         display: initial;
+    }
+    .menu svg {
         position: relative;
         animation: tiltAnimation 3s infinite alternate;
     }
