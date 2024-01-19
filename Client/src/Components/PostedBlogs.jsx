@@ -19,7 +19,7 @@ const PostedBlogs = () => {
     const userToken = useSelector((state) => state.Authentication);
     const verifiedData = useSelector((state) => state.VerifiedUser);
     const userName = verifiedData && verifiedData.userName;
-    const findBlogs = blogs.filter((e) => e.author === userName)
+    const findBlogs = userToken.length !== 0 && blogs.filter((e) => e.author === userName);
 
     // To get the data of all blogs
     const getBlogData = async () => {
@@ -94,12 +94,33 @@ const PostedBlogs = () => {
         <>
             {
                 load ? <Loading /> :
+                    
                     <div className='main'>
                         {
-                            userName ? 
-                             (
-                                blogs.filter((e) => e.author === userName)
-                                    .map((currElem, index) => {
+                            userName ?
+                                (
+                                    blogs.filter((e) => e.author === userName)
+                                        .map((currElem, index) => {
+                                            const { title, summary, image, createdAt, _id, author } = currElem;
+                                            const localTime = new Date(createdAt).toLocaleString();
+                                            return (
+                                                <AllBlogs
+                                                    title={title}
+                                                    summary={summary}
+                                                    image={image}
+                                                    localTime={localTime}
+                                                    _id={_id}
+                                                    author={author}
+                                                    userToken={userToken}
+                                                    handleNavigate={handleNavigate}
+                                                    handleEdit={handleEdit}
+                                                    handleDeleteBlog={handleDeleteBlog}
+                                                    key={index}
+                                                />
+                                            )
+                                        })
+                                ) : (
+                                    blogs.map((currElem, index) => {
                                         const { title, summary, image, createdAt, _id, author } = currElem;
                                         const localTime = new Date(createdAt).toLocaleString();
                                         return (
@@ -118,30 +139,10 @@ const PostedBlogs = () => {
                                             />
                                         )
                                     })
-                            ) : (
-                                blogs.map((currElem, index) => {
-                                    const { title, summary, image, createdAt, _id, author } = currElem;
-                                    const localTime = new Date(createdAt).toLocaleString();
-                                    return (
-                                        <AllBlogs
-                                            title={title}
-                                            summary={summary}
-                                            image={image}
-                                            localTime={localTime}
-                                            _id={_id}
-                                            author={author}
-                                            userToken={userToken}
-                                            handleNavigate={handleNavigate}
-                                            handleEdit={handleEdit}
-                                            handleDeleteBlog={handleDeleteBlog}
-                                            key={index}
-                                        />
-                                    )
-                                })
-                            )
+                                )
                         }
                         {
-                            findBlogs.length === 0 && <h2 className='noBlogTitle'>No Post Found For {userName}'s Account</h2>
+                            (findBlogs.length === 0) ? <h2 className='noBlogTitle'>No Post Found For {userName}'s Account</h2>: ""
                         }
                     </div>
             }
