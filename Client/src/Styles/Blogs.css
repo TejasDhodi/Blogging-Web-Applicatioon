@@ -80,7 +80,7 @@
     text-align: center;
 }
 
-.viewBlog .blogTitle {
+.viewBlog .blogTitle, .noBlogTitle {
     text-align: center;
 }
 

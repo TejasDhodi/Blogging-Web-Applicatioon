@@ -19,6 +19,7 @@ const PostedBlogs = () => {
     const userToken = useSelector((state) => state.Authentication);
     const verifiedData = useSelector((state) => state.VerifiedUser);
     const userName = verifiedData && verifiedData.userName;
+    const findBlogs = blogs.filter((e) => e.author === userName)
 
     // To get the data of all blogs
     const getBlogData = async () => {
@@ -95,7 +96,8 @@ const PostedBlogs = () => {
                 load ? <Loading /> :
                     <div className='main'>
                         {
-                            userName ? (
+                            userName ? 
+                             (
                                 blogs.filter((e) => e.author === userName)
                                     .map((currElem, index) => {
                                         const { title, summary, image, createdAt, _id, author } = currElem;
@@ -137,6 +139,9 @@ const PostedBlogs = () => {
                                     )
                                 })
                             )
+                        }
+                        {
+                            findBlogs.length === 0 && <h2 className='noBlogTitle'>No Post Found For {userName}'s Account</h2>
                         }
                     </div>
             }
