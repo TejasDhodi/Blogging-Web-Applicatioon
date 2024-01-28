@@ -20,7 +20,9 @@ const createBlog = async (req, res) => {
             summary,
             content,
             image: imageUrl.url,
-            author
+            author,
+            domain,
+            category
         })
 
         res.status(201).json({ createdBlog: blogData });
