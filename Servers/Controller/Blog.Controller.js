@@ -4,10 +4,10 @@ const blogModel = require('../Model/Blog.Model');
 // Post Controller
 const createBlog = async (req, res) => {
     try {
-        const { title, summary, content, author, domain, category } = req.body;
+        const { title, summary, content, author, domain, category, technology } = req.body;
         const image = req.files?.image[0]?.path;
 
-        if (!title || !summary || !content || !image || !domain || !category) {
+        if (!title || !summary || !content || !image || !domain || !category || !technology) {
             return res.status(500).json({
                 message: "All fields are Required"
             })
@@ -22,7 +22,8 @@ const createBlog = async (req, res) => {
             image: imageUrl.url,
             author,
             domain,
-            category
+            category,
+            technology
         })
 
         res.status(201).json({ createdBlog: blogData });
@@ -63,10 +64,10 @@ const getSingleBlog = async (req, res) => {
 const updateBlog = async (req, res) => {
 
     try {
-        const { title, summary, content } = req.body;
+        const { title, summary, content, domain, category, technology } = req.body;
         const image = req.files?.image[0]?.path;
 
-        if (!title || !summary || !content || !image) {
+        if (!title || !summary || !content || !image || !domain || !category || !technology) {
             res.status(500).json({
                 message: "All fields are Required"
             })
@@ -84,7 +85,10 @@ const updateBlog = async (req, res) => {
             title,
             summary,
             content,
-            image: imageUrl.url
+            image: imageUrl.url,
+            domain,
+            category,
+            technology
         }, {
             new: true
         }

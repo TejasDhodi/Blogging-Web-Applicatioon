@@ -27,6 +27,10 @@ const blogValidatorSchema = z.object({
     category: z
         .string({ required_error: "Category is required" })
         .trim(),
+
+    technology: z
+        .string({ required_error: "Category is required" })
+        .trim(),
 });
 
 module.exports = blogValidatorSchema;

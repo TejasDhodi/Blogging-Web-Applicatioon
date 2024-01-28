@@ -30,6 +30,10 @@ const blogSchema = new Schema({
         type: String,
         required: true
     },
+    technology: {
+        type: String,
+        required: true
+    },
 }, {
     timestamps: true
 });
