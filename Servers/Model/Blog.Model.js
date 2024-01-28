@@ -21,7 +21,15 @@ const blogSchema = new Schema({
     author: {
         type: String,
         required: true
-    }
+    },
+    domain: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true
+    },
 }, {
     timestamps: true
 });

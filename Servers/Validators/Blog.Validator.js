@@ -18,7 +18,15 @@ const blogValidatorSchema = z.object({
 
     author: z
         .string({ required_error: "Author is required" })
-        .trim()
+        .trim(),
+
+    domain: z
+        .string({ required_error: "Domain is required" })
+        .trim(),
+
+    Category: z
+        .string({ required_error: "Category is required" })
+        .trim(),
 });
 
 module.exports = blogValidatorSchema;
