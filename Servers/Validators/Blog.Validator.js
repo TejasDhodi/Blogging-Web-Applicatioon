@@ -24,7 +24,7 @@ const blogValidatorSchema = z.object({
         .string({ required_error: "Domain is required" })
         .trim(),
 
-    Category: z
+    category: z
         .string({ required_error: "Category is required" })
         .trim(),
 });
