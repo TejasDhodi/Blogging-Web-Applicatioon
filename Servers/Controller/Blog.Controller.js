@@ -7,7 +7,7 @@ const createBlog = async (req, res) => {
         const { title, summary, content, author, domain, category } = req.body;
         const image = req.files?.image[0]?.path;
 
-        if (!title || !summary || !content || !image || domain || category) {
+        if (!title || !summary || !content || !image || !domain || !category) {
             return res.status(500).json({
                 message: "All fields are Required"
             })
