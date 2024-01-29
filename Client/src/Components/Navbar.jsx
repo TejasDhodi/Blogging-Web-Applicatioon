@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { data } from '../Services/Data';
 import '../Styles/Navbar.css'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
@@ -38,6 +39,15 @@ const Navbar = () => {
     dispatch(clearProfile());
     setNavbar(false)
   }
+
+  // const uniqueDomain = [...new Set(data.map((e) => e.value))];
+  // const cat = data.flatMap
+  // const cat =[...new Set(data.flatMap((e) => e.category.map((c) => c.label)))];
+  // const uniqueCategory = [...new Set(cat.map((e) => e.value))];
+  // console.log({
+  //   uniqueDomain,
+  //   cat
+  // });
 
   return (
     <>

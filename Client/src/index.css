@@ -1,3 +1,6 @@
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
@@ -31,7 +34,7 @@ body {
   width: 100%;
 }
 
-.inputs input{
+.inputs input, option{
   padding: 0.5rem 0 0.5rem 0.5rem;
   width: 100%;
   margin: 0.5rem 0;

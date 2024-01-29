@@ -1,39 +1,35 @@
-.blogs {
-    width: 60%;
-    height: auto;
-    margin: 1rem auto;
-    box-shadow: 0 0 10px;
-    background-color: beige;
-    position: relative;
-    border-radius: 1.5rem;
+.allBlogs {
+    display: flex;
+    justify-content: center;
+    gap: 3rem 2rem;
+    flex-wrap: wrap;
 }
-
-.post {
+.blogs {
+    height: auto;
+    width: 20rem;
     display: flex;
     justify-content: space-between;
-    /* gap: 1rem; */
+    flex-direction: column;
 }
 
 .postImage img {
-    width: 28%;
-    height: 100%;
-    position: absolute;
-    border-radius: 1.5rem 0 0 1.5rem;
+    width: 20rem;
+    height: 15rem;
 }
 
-.postDescription {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.5rem 0;
-    /* background-color: rebeccapurple; */
-    width: 70%;
+.postDescription .postTitle {
+    font-family: 'Roboto Mono', monospace;
 }
 
+.postDescription .info,
 .postSummary {
+    font-family: 'Nanum Gothic', sans-serif;
     text-align: justify;
-    width: 100%;
     word-wrap: break-word;
+}
+
+.postDescription .info {
+    margin: 1rem 0;
 }
 
 .controls {
@@ -66,10 +62,50 @@
     color: red;
 }
 
+/* Search Filter */
+
+.filter {
+    margin: 2rem auto;
+}
+
+.searchFilter {
+    /* text-align: center; */
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.searchFilter .searchInput{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.7rem 0 0 0.7rem;
+    transition: 300ms ease;
+    display: block;
+    border: 1px solid;
+    border-right: none;
+
+}
+
+.searchFilter .searchDomain{
+    padding: 1rem;
+    border-radius: 0 0.7rem 0.7rem 0;
+    display: block;
+    border: 1px solid;
+    border-left: 1px solid rgb(229, 227, 227);
+}
+
+.multiFilter {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.categoryFilter button {
+    margin: 0 1rem;
+}
+
 /* View Blog Page */
 .viewBlog {
     width: 100%;
-    /* text-align: center; */
 }
 
 .viewBlog .blogImg {
@@ -92,6 +128,11 @@
 
 /* Create Blog */
 
+.createPost {
+    display: flex;
+    flex-direction: column;
+}
+
 .fields {
     width: 20rem;
     height: auto;
@@ -108,8 +149,10 @@
     border-top: 1px solid #000;
 }
 
+
+
 /* Media Queries */
-@media screen and (max-width: 1280px) { 
+@media screen and (max-width: 1280px) {
     .postTitle {
         font-size: 1.3rem;
     }

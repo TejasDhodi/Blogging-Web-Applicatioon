@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import BlogEditor from './BlogEditor';
+import { data } from '../Services/Data';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { DNA } from 'react-loader-spinner'
@@ -17,7 +18,10 @@ const CreateBlog = () => {
     const [input, setInput] = useState({
         title: "",
         summary: "",
-        author: userName
+        author: userName,
+        domain: "",
+        category: "",
+        technology: ""
     });
 
     const [content, setContent] = useState("");
@@ -26,6 +30,10 @@ const CreateBlog = () => {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+
+    const selectedDomain = data.find((item) => item.value === input.domain);
+    const selectedCategory = selectedDomain?.category || [];
+    const selectedTechnology = selectedCategory.find((item) => item.value === input.category)?.technology || [];
 
     const handleInputs = (e) => {
         const { name, value } = e.target;
@@ -52,6 +60,9 @@ const CreateBlog = () => {
             formData.append('summary', input.summary);
             formData.append('content', content);
             formData.append('author', input.author);
+            formData.append('domain', input.domain);
+            formData.append('category', input.category);
+            formData.append('technology', input.technology);
             formData.append('image', image);
 
             const response = await axios.post('https://blog-backend-api-99h6.onrender.com/api/v1/createBlog', formData, {
@@ -95,6 +106,51 @@ const CreateBlog = () => {
                     <label htmlFor="author">Author</label>
                     <input type="text" id='author' name="author" value={input.author} onChange={handleInputs} required />
                 </div>
+                <div className="inputs">
+
+                    <label htmlFor="domain">Domain</label>
+                    <select id='domain' name="domain" value={input.domain} onChange={handleInputs} required >
+                        <option value="" disabled>Select Domain</option>
+                        {
+                            data.map((currElem, index) => {
+                                const { value, label } = currElem;
+                                return (
+                                    <option value={value} key={index}>{label}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </div>
+                <div className="inputs">
+                    <label htmlFor="category">Category</label>
+                    <select id='category' name="category" value={input.category} onChange={handleInputs} required >
+                        <option value="" disabled>Select Category</option>
+                        {
+                            selectedCategory.map((currElem, index) => {
+                                const {value, label} = currElem;
+                                return (
+                                    <option value={value} key={index}>{label}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </div>
+
+                <div className="inputs">
+                    <label htmlFor="technology">technology</label>
+                    <select id='technology' name="technology" value={input.technology} onChange={handleInputs} required >
+                        <option value="" disabled>Select technology</option>
+                        {
+                            selectedTechnology.map((currElem, index) => {
+                                const {value, label} = currElem;
+                                return (
+                                    <option value={value} key={index}>{label}</option>
+                                )
+                            })
+                        }
+                    </select>
+                </div>
+
                 <div className="inputs">
                     <label htmlFor="image">Image</label>
                     <input type="file" id='image' onChange={handleFile} required />

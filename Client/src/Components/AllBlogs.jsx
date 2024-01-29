@@ -13,7 +13,7 @@ const AllBlogs = ({ title, summary, image, localTime, _id, author, userToken, ha
                         <h2 className='postTitle'>{title}</h2>
                         <div className="info">
                             <p className="time">Created At : {localTime} </p>
-                            <p>Created By : {author}</p>
+                            <p>Author : {author}</p>
                         </div>
                         <p className='postSummary'>{summary}</p>
                     </div>
