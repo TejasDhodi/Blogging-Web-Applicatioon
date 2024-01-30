@@ -40,22 +40,13 @@ const Navbar = () => {
     setNavbar(false)
   }
 
-  // const uniqueDomain = [...new Set(data.map((e) => e.value))];
-  // const cat = data.flatMap
-  // const cat =[...new Set(data.flatMap((e) => e.category.map((c) => c.label)))];
-  // const uniqueCategory = [...new Set(cat.map((e) => e.value))];
-  // console.log({
-  //   uniqueDomain,
-  //   cat
-  // });
-
   return (
     <>
       <nav className="navbar">
         <div className="navBrand" onClick={redirectToHome}>
           Blog
         </div>
-        <ul className={navbar? "navItems active": "navItems"}>
+        <ul className={navbar ? "navItems active" : "navItems"}>
           {
             !userToken.length > 0 ? (
               <>
@@ -71,7 +62,7 @@ const Navbar = () => {
             )
           }
         </ul>
-        <div className={navbar? "menu rotateMenu": "menu"} onClick={handleNavbar}>
+        <div className={navbar ? "menu rotateMenu" : "menu"} onClick={handleNavbar}>
           <FaArrowLeft />
         </div>
       </nav>

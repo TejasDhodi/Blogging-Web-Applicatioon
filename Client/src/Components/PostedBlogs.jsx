@@ -95,9 +95,7 @@ const PostedBlogs = () => {
         console.log('Selected Domain:', domain);
 
         if (domain === 'All') {
-            console.log('Resetting to show all blogs');
-            setFilteredBlogs(blogs);
-            return;
+            return setFilteredBlogs(blogs);
         }
 
         const filtered = blogs && blogs.filter((currElem) => {
@@ -109,7 +107,6 @@ const PostedBlogs = () => {
         setHandleFilter(true);
 
     }
-
 
     // To Handle Category Filter
     const handleCategoryFilter = (category) => {
@@ -141,13 +138,19 @@ const PostedBlogs = () => {
 
                     <div className='main'>
                         <div className="filter">
-                            <FilterComponent search={search} setSearch={setSearch} handleDomainFilter={handleDomainFilter} handleCategoryFilter={handleCategoryFilter} />
+                            <FilterComponent
+                                search={search}
+                                setSearch={setSearch}
+                                handleDomainFilter={handleDomainFilter}
+                                handleCategoryFilter={handleCategoryFilter}
+
+                            />
                         </div>
                         <div className="allBlogs">
                             {
                                 userName ?
                                     (
-                                        (handleFilter? filteredBlogs : filterCategory).filter((e) => e.author === userName).filter((e) => e.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+                                        (handleFilter ? filteredBlogs : filterCategory).filter((e) => e.author === userName).filter((e) => e.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
                                             .map((currElem, index) => {
                                                 const { title, summary, image, createdAt, _id, author } = currElem;
                                                 const localTime = new Date(createdAt).toLocaleString();
@@ -168,7 +171,7 @@ const PostedBlogs = () => {
                                                 )
                                             })
                                     ) : (
-                                        (handleFilter? filteredBlogs : filterCategory).filter((e) => e.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).map((currElem, index) => {
+                                        (handleFilter ? filteredBlogs : filterCategory).filter((e) => e.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())).map((currElem, index) => {
                                             const { title, summary, image, createdAt, _id, author } = currElem;
                                             const localTime = new Date(createdAt).toLocaleString();
                                             return (
@@ -188,6 +191,9 @@ const PostedBlogs = () => {
                                             )
                                         })
                                     )
+                            }
+                            {
+                                (filterCategory.length === 0) ? <h2>Not Available Post Related To This Category</h2> : ''
                             }
                             {
                                 (findBlogs.length === 0) ? <h2 className='noBlogTitle'>No Post Found For {userName}'s Account</h2> : ""
